@@ -37,7 +37,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+   # print(fromString)
+    s = fromString.find(":") + \
+        len(":")
+    e = fromString.find("(")
+    f = fromString[s:e].strip()
+    return f
 
 
 '''
@@ -269,7 +274,8 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
     test.testMakeDataFrame()
-
+    test.testParseName()
+    
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
