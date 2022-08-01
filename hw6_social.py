@@ -25,7 +25,9 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
+    df = pd.read_csv(filename)
+    
+    return df
 
 
 '''
@@ -35,7 +37,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+   # print(fromString)
+    start = fromString.find(":") + \
+        len(":")
+    end = fromString.find("(")
+    final = fromString[start:end].strip()
+    return final
 
 
 '''
@@ -45,7 +52,12 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    start = fromString.find("(") + \
+        len(":")
+    end = fromString.find("from")
+    final = fromString[start:end].strip()
+    
+    return final
 
 
 '''
@@ -55,7 +67,14 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    cut = fromString.find("(")
+    sub_s = fromString[cut:]
+    start = sub_s.find("from") + \
+    len("from")
+    end = sub_s.find(")")
+    final = sub_s[start:end].strip()
+    #print(sub_s)
+    return final
 
 
 '''
@@ -266,7 +285,11 @@ if __name__ == "__main__":
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
-
+    test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
+    
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
