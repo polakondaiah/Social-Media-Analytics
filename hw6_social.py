@@ -107,11 +107,7 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    #print(stateDf)
-    #print(state)
-   
     reg = stateDf.loc[stateDf['state'] == state, 'region']
-    #print(reg.values)
     return reg.values[0]
 
 
