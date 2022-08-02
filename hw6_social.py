@@ -25,7 +25,9 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
+    df = pd.read_csv(filename)
+    
+    return df
 
 
 '''
@@ -35,7 +37,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+   # print(fromString)
+    start = fromString.find(":") + \
+        len(":")
+    end = fromString.find("(")
+    final = fromString[start:end].strip()
+    return final
 
 
 '''
@@ -45,7 +52,12 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    start = fromString.find("(") + \
+        len(":")
+    end = fromString.find("from")
+    final = fromString[start:end].strip()
+    
+    return final
 
 
 '''
@@ -55,7 +67,14 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    cut = fromString.find("(")
+    sub_s = fromString[cut:]
+    start = sub_s.find("from") + \
+    len("from")
+    end = sub_s.find(")")
+    final = sub_s[start:end].strip()
+    #print(sub_s)
+    return final
 
 
 '''
@@ -65,7 +84,20 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
+    words_list = message.split("#")
+   # print(words_list)
+    hashtag_words = []
+    for word in words_list[1:]:
+        hash_word = ""
+        for letter in word:
+            if letter not in endChars:
+                hash_word += letter
+            else:
+                break
+        hashtag_words.append("#"+hash_word)
+               
+       
+    return hashtag_words
 
 
 '''
@@ -75,7 +107,8 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    reg = stateDf.loc[stateDf['state'] == state, 'region']
+    return reg.values[0]
 
 
 '''
@@ -85,7 +118,33 @@ Parameters: dataframe ; dataframe
 Returns: None
 '''
 def addColumns(data, stateDf):
-    return
+    names_l = []
+    positions_l = []
+    states_l = []
+    regions_l = []
+    hashtags_l = []
+   
+    for index, row in data.iterrows():
+        a = row["label"]
+        v = row["text"]
+        name = parseName(a)
+        names_l.append(name)
+        position = parsePosition(a)
+        positions_l.append(position)      
+        state = parseState(a)
+        states_l.append(state)
+        region = getRegionFromState(stateDf,state)
+        regions_l.append(region)
+        hashtags = findHashtags(v)
+        hashtags_l.append(hashtags)
+    data["name"] = names_l
+    data["position"] = positions_l
+    data["state"] = states_l
+    data["region"] = regions_l
+    data["hashtags"] = hashtags_l
+              
+       
+    return None
 
 
 ### PART 2 ###
@@ -266,7 +325,13 @@ if __name__ == "__main__":
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
-
+    test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
+    test.testFindHashtags()
+    test.testGetRegionFromState()
+    
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
