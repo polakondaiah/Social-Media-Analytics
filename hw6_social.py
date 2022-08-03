@@ -20,7 +20,7 @@ endChars = [ " ", "\n", "#", ".", ",", "?", "!", ":", ";", ")" ]
 
 '''
 makeDataFrame(filename)
-#3 [Check6-1]
+    #3 [Check6-1]
 Parameters: str
 Returns: dataframe
 '''
@@ -190,7 +190,23 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
-    return
+    dict_map = {}
+    for index, row in data.iterrows():
+        if len(colName) != 0 and len(dataToCount) != 0:
+     
+            if row[colName] == dataToCount:
+                if row["state"] in dict_map:
+                    dict_map[row["state"]] += 1
+                else:
+                    dict_map[row["state"]] = 1
+              
+        else:
+            if row["state"] in dict_map:
+                dict_map[row["state"]] += 1
+            else:
+                dict_map[row["state"]] = 1
+   # print(dict_map)
+    return dict_map
 
 
 '''
@@ -351,6 +367,7 @@ if __name__ == "__main__":
     test.runWeek2()
     test.testFindSentiment()
     test.testAddSentimentColumn()
+    test.testGetDataCountByState()
 
     ## Uncomment these for Week 3 ##
     """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
