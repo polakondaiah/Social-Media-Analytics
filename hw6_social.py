@@ -216,7 +216,20 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    outer_dict = {}
+    for index, row in data.iterrows():
+        if row["region"] not in outer_dict:
+            outer_dict [row["region"]] = {}
+             
+            
+        if row [colName] in outer_dict[row["region"]]:
+            outer_dict[row["region"]][row[colName]] +=1
+        else:
+            outer_dict[row["region"]][row[colName]] =1
+           
+        
+                    
+    return outer_dict
 
 
 '''
