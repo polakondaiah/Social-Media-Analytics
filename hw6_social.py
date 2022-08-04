@@ -267,8 +267,21 @@ Parameters: dataframe ; str
 Returns: float
 '''
 def getHashtagSentiment(data, hashtag):
-    return
-
+    t_mes = 0
+    count = 0
+    for index, row in data.iterrows():
+        if hashtag in findHashtags(row["text"]):
+            if row["sentiment"] == "positive":
+                count += 1
+            elif row["sentiment"] == "negative":
+                count -= 1
+            elif row["sentiment"] == "neutral":
+                count += 0
+            t_mes += 1
+            
+    
+    return count/t_mes
+x
 
 ### PART 3 ###
 
@@ -390,6 +403,7 @@ if __name__ == "__main__":
     test.testAddSentimentColumn()
     test.testGetDataCountByState()
     test.testGetHashtagRates()
+    test.testGetHashtagSentiment()
 
     ## Uncomment these for Week 3 ##
     """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
