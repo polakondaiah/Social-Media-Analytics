@@ -255,8 +255,10 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
-
+    sort_dict = dict((sorted(hashtags.items(), key= lambda x : x[1], reverse = True))[:count])
+    #dict_map = [(i,j) for i,j in sort_dict.items()]
+   # print(sort_dict)
+    return sort_dict
 
 '''
 getHashtagSentiment(data, hashtag)
