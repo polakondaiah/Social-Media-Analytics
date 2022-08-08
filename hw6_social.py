@@ -3,7 +3,8 @@ Social Media Analytics Project
 Name:
 Roll Number:
 """
-
+from fileinput import filename
+from tkinter import CENTER
 import hw6_social_tests as test
 
 project = "Social" # don't edit this
@@ -16,6 +17,8 @@ nltk.download('vader_lexicon', quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
+from collections import Counter
+import operator
 endChars = [ " ", "\n", "#", ".", ",", "?", "!", ":", ";", ")" ]
 
 '''
@@ -193,7 +196,6 @@ def getDataCountByState(data, colName, dataToCount):
     dict_map = {}
     for index, row in data.iterrows():
         if len(colName) != 0 and len(dataToCount) != 0:
-     
             if row[colName] == dataToCount:
                 if row["state"] in dict_map:
                     dict_map[row["state"]] += 1
@@ -281,7 +283,7 @@ def getHashtagSentiment(data, hashtag):
             
     
     return count/t_mes
-x
+
 
 ### PART 3 ###
 
@@ -292,7 +294,18 @@ Parameters: dict mapping strs to ints ; str
 Returns: None
 '''
 def graphStateCounts(stateCounts, title):
-    import matplotlib.pyplot as plt
+    # import matplotlib.pyplot as plt
+    # dict_to_list = list(stateCounts.items())
+    # for key,value in dict_to_list:
+    #     labels = key
+    #     yValues = value
+    #     plt.bar(labels,yValues,color='red')
+    #     plt.xlabel(title,loc='center')
+    #     plt.xticks(rotation="vertical")
+    #     plt.title(title)
+        
+    plt.show()
+    
     return
 
 
@@ -303,6 +316,17 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
+    
+    
+    # feature ={}
+    # h = {}
+    # for i in stateFeatureCounts:
+    #     feature[i] = stateFeatureCounts[i]/stateCounts[i]
+    # s = Counter(feature)
+    # sort = list(sorted(s.items(), key=operator.itemgetter(1),reverse=True))[:n]
+    # for key,value in sort:
+    #     h[key] = value
+    # graphStateCounts(h,title)
     return
 
 
@@ -313,6 +337,21 @@ Parameters: dict mapping strs to (dicts mapping strs to ints) ; str
 Returns: None
 '''
 def graphRegionComparison(regionDicts, title):
+    # region_names = []
+    # feature_names = []
+    # region_feature = []
+    # for key,values in regionDicts.items():
+    #     print(key)
+       # print(values)
+    #     feature_names.append(key)
+    #     temp = []
+    #     for region,feature in values.items():
+    #         if region not in region_names:
+    #             region_names.append(region)
+    #         temp.append(feature)
+    #     region_feature.append(temp)
+    # sideBySideBarPlots(region_names,feature_names,region_feature,title)
+    
     return
 
 
@@ -323,6 +362,16 @@ Parameters: dataframe
 Returns: None
 '''
 def graphHashtagSentimentByFrequency(data):
+    # hashtags = []
+    # frequency = []
+    # sentiment = []
+    # hashtag = getHashtagRates(data)
+    # common = mostCommonHashtags(hashtag,50)
+    # for key,value in common.items():
+    #     hashtags.append(key)
+    #     frequency.append(value)
+    #     sentiment.append(getHashtagSentiment(data,key))
+    # scatterPlot(frequency,sentiment,hashtags,"sentiment_graph")
     return
 
 
@@ -384,27 +433,30 @@ def scatterPlot(xValues, yValues, labels, title):
 # This code runs the test cases to check your work
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
+   # test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
-    test.testMakeDataFrame()
-    test.testParseName()
-    test.testParsePosition()
-    test.testParseState()
-    test.testFindHashtags()
-    test.testGetRegionFromState()
+    # test.runWeek1()
+    # test.testMakeDataFrame()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
+    # test.testFindHashtags()
+    # test.testGetRegionFromState()
     
     ## Uncomment these for Week 2 ##
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
+  #  test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()
-    test.testFindSentiment()
-    test.testAddSentimentColumn()
-    test.testGetDataCountByState()
-    test.testGetHashtagRates()
-    test.testGetHashtagSentiment()
+    #test.runWeek2()
+    # df = makeDataFrame("data/politicaldata.csv")
+    # test.testFindSentiment()
+    # test.testAddSentimentColumn()
+    # test.testGetDataCountByState()
+    # test.testGetHashtagRates()
+    # test.testGetHashtagSentiment()
 
     ## Uncomment these for Week 3 ##
-    """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()"""
+    
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()
+    
