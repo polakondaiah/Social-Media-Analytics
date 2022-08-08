@@ -2,6 +2,7 @@ from hw6_social import *
 
 #### PART 1 TESTS ####
 
+
 def testMakeDataFrame():
     print("Testing makeDataFrame()...", end="")
     df = makeDataFrame("data/politicaldata.csv")
@@ -12,21 +13,27 @@ def testMakeDataFrame():
     assert(stateDf.size == 204)
     print("... done!")
 
+
 def testParseName():
     print("Testing parseName()...", end="")
-    assert(parseName("From: Steny Hoyer (Representative from Maryland)") == "Steny Hoyer")
+    assert(parseName("From: Steny Hoyer (Representative from Maryland)")
+           == "Steny Hoyer")
     assert(parseName("From: Mitch (Senator from Kentucky)") == "Mitch")
-    assert(parseName("From: Stephanie Rosenthal (Prof from PA)") == "Stephanie Rosenthal")
+    assert(parseName("From: Stephanie Rosenthal (Prof from PA)")
+           == "Stephanie Rosenthal")
     assert(parseName("From: Kelly (Senator from Pennsylvania)") == "Kelly")
     print("... done!")
 
+
 def testParsePosition():
     print("Testing parsePosition()...", end="")
-    assert(parsePosition("From: Steny Hoyer (Representative from Maryland)") == "Representative")
+    assert(parsePosition(
+        "From: Steny Hoyer (Representative from Maryland)") == "Representative")
     assert(parsePosition("From: Mitch (Senator from Kentucky)") == "Senator")
     assert(parsePosition("From: Stephanie Rosenthal (Prof from PA)") == "Prof")
     assert(parsePosition("From: Kelly (Senator from Pennsylvania)") == "Senator")
     print("... done!")
+
 
 def testParseState():
     print("Testing parseState()...", end="")
@@ -34,21 +41,30 @@ def testParseState():
     assert(parseState("From: Mitch (Senator from Kentucky)") == "Kentucky")
     assert(parseState("From: Stephanie Rosenthal (Prof from PA)") == "PA")
     assert(parseState("From: Kelly (Senator from Pennsylvania)") == "Pennsylvania")
-    assert(parseState("From: Heidi Heitkamp (Senator from North Dakota)") == "North Dakota")
+    assert(parseState("From: Heidi Heitkamp (Senator from North Dakota)")
+           == "North Dakota")
     assert(parseState("From: Chris Collins (Representative from New York)") == "New York")
     print("... done!")
 
+
 def testFindHashtags():
     print("Testing findHashtags()...", end="")
-    assert(findHashtags("I am so #excited to watch #TheMandalorian! #starwars") == [ "#excited", "#TheMandalorian", "#starwars" ])
-    assert(findHashtags("#CMUCarnival will be amazing as long as it doesn't rain #weatherchannel") == [ "#CMUCarnival", "#weatherchannel" ])
-    assert(findHashtags("#Whatif, #everything #is: #hashtags?") ==  [ "#Whatif", "#everything", "#is", "#hashtags" ])
-    assert(findHashtags("I don't like hashtags, I think they're overused") == [ ])
-    assert(findHashtags("So excited for #registration!Let's go CMU!") == [ "#registration" ])
-    assert(findHashtags("I'm nervous-#registration but I think it should work out") == [ "#registration" ])
-    assert(findHashtags("I'm waitlisted for everything #registration...") == [ "#registration" ])
-    assert(findHashtags("Not sure what to take #110#112") == [ "#110", "#112" ])
+    assert(findHashtags("I am so #excited to watch #TheMandalorian! #starwars") == [
+           "#excited", "#TheMandalorian", "#starwars"])
+    assert(findHashtags("#CMUCarnival will be amazing as long as it doesn't rain #weatherchannel") == [
+           "#CMUCarnival", "#weatherchannel"])
+    assert(findHashtags("#Whatif, #everything #is: #hashtags?")
+           == ["#Whatif", "#everything", "#is", "#hashtags"])
+    assert(findHashtags("I don't like hashtags, I think they're overused") == [])
+    assert(findHashtags("So excited for #registration!Let's go CMU!")
+           == ["#registration"])
+    assert(findHashtags(
+        "I'm nervous-#registration but I think it should work out") == ["#registration"])
+    assert(findHashtags("I'm waitlisted for everything #registration...")
+           == ["#registration"])
+    assert(findHashtags("Not sure what to take #110#112") == ["#110", "#112"])
     print("... done!")
+
 
 def testGetRegionFromState():
     print("Testing getRegionFromState()...", end="")
@@ -58,6 +74,7 @@ def testGetRegionFromState():
     assert(str(getRegionFromState(stateDf, "Nebraska")) == "Midwest")
     assert(str(getRegionFromState(stateDf, "Texas")) == "South")
     print("... done!")
+
 
 def testAddColumns():
     print("Testing addColumns()...", end="")
@@ -76,10 +93,11 @@ def testAddColumns():
     assert(df["region"][1] == "South")
     assert(df["region"][4] == "West")
     assert(df["region"][4979] == "South")
-    assert(df["hashtags"][1] == [ "#Obamacare" ])
-    assert(df["hashtags"][4] == [ "#drones", "#innovation", "#privacy", "#UAS" ])
-    assert(df["hashtags"][4979] == [ ])
+    assert(df["hashtags"][1] == ["#Obamacare"])
+    assert(df["hashtags"][4] == ["#drones", "#innovation", "#privacy", "#UAS"])
+    assert(df["hashtags"][4979] == [])
     print("... done!")
+
 
 def week1Tests():
     testMakeDataFrame()
@@ -89,6 +107,7 @@ def week1Tests():
     testFindHashtags()
     testGetRegionFromState()
     testAddColumns()
+
 
 def runWeek1():
     df = makeDataFrame("data/politicaldata.csv")
@@ -108,6 +127,7 @@ def testFindSentiment():
     assert(findSentiment(classifier, "") == "neutral")
     print("...done!")
 
+
 def testAddSentimentColumn():
     print("Testing addSentimentColumn()...", end="")
     df = makeDataFrame("data/politicaldata.csv")
@@ -116,6 +136,7 @@ def testAddSentimentColumn():
     assert(df["sentiment"][1] == "negative")
     assert(df["sentiment"][4978] == "positive")
     print("... done!")
+
 
 def testGetDataCountByState(df):
     print("Testing getDataCountByState()...", end="")
@@ -144,6 +165,7 @@ def testGetDataCountByState(df):
     assert(d4["Nevada"] == 50)
     print("... done!")
 
+
 def testGetDataForRegion(df):
     print("Testing getDataForRegion()...", end="")
     d1 = getDataForRegion(df, "message")
@@ -161,6 +183,7 @@ def testGetDataForRegion(df):
 
     print(".. done!")
 
+
 def testGetHashtagRates(df):
     print("Testing getHashtagRates()...", end="")
     d = getHashtagRates(df)
@@ -171,17 +194,22 @@ def testGetHashtagRates(df):
     assert(d["#ObamaCare"] == 20)
     print("... done!")
 
+
 def testMostCommonHashtags(df):
     print("Testing mostCommonHashtags()...", end="")
-    d1 = { "#CMU" : 10, "#TheMandalorian" : 15, "#tgif" : 3, "#homework" : 20, "#hashtag" : 1, "#programming" : 7, "#testcase" : 1, "#WorldPeace" : 9, "#coffee" : 18, "#naptime" : 2 }
-    assert(mostCommonHashtags(d1, 1) == { "#homework" : 20 })
-    assert(mostCommonHashtags(d1, 2) == { "#homework" : 20, "#coffee" : 18 })
-    assert(mostCommonHashtags(d1, 5) == { "#homework" : 20, "#coffee" : 18, "#TheMandalorian" : 15, "#CMU" : 10, "#WorldPeace" : 9 })
+    d1 = {"#CMU": 10, "#TheMandalorian": 15, "#tgif": 3, "#homework": 20, "#hashtag": 1,
+          "#programming": 7, "#testcase": 1, "#WorldPeace": 9, "#coffee": 18, "#naptime": 2}
+    assert(mostCommonHashtags(d1, 1) == {"#homework": 20})
+    assert(mostCommonHashtags(d1, 2) == {"#homework": 20, "#coffee": 18})
+    assert(mostCommonHashtags(d1, 5) == {
+           "#homework": 20, "#coffee": 18, "#TheMandalorian": 15, "#CMU": 10, "#WorldPeace": 9})
 
     d2 = getHashtagRates(df)
-    assert(mostCommonHashtags(d2, 1) == { "#Obamacare" : 61 })
-    assert(mostCommonHashtags(d2, 6) == { "#Obamacare" : 61, "#IRS" : 26, "#RenewUI" : 21, "#jobs" : 20, "#Benghazi" : 20, "#ObamaCare" : 20 })
+    assert(mostCommonHashtags(d2, 1) == {"#Obamacare": 61})
+    assert(mostCommonHashtags(d2, 6) == {
+           "#Obamacare": 61, "#IRS": 26, "#RenewUI": 21, "#jobs": 20, "#Benghazi": 20, "#ObamaCare": 20})
     print("... done!")
+
 
 def testGetHashtagSentiment(df):
     # Note - we're comparing floats here, so we'll check if they're
@@ -211,6 +239,7 @@ def week2Tests():
     testMostCommonHashtags(df)
     testGetHashtagSentiment(df)
 
+
 def runWeek2():
     df = makeDataFrame("data/politicaldata.csv")
     stateDf = makeDataFrame("data/statemappings.csv")
@@ -238,16 +267,21 @@ def runWeek2():
     print("\nAudience Types for Region")
     print(audiences)
 
+    print("\n")
+
     hashtags = getHashtagRates(df)
     freqHashtags = mostCommonHashtags(hashtags, 6)
     for hashtag in freqHashtags:
         print(hashtag, "sentiment score:", getHashtagSentiment(df, hashtag))
 
+    print("\n")
 
 ### PART 3 TESTS ###
 
 # Instead of running individual tests, check the new graph generated by doWeek3
 # after you finish each function.
+
+
 def runWeek3():
     print("Prepare for a bunch of charts!")
     df = makeDataFrame("data/politicaldata.csv")
@@ -268,7 +302,8 @@ def runWeek3():
     nationalCounts = getDataCountByState(df, "audience", "national")
     graphTopNStates(stateCounts, attackCounts, 5, "Top Attack Message Rates")
     graphTopNStates(stateCounts, policyCounts, 5, "Top Policy Message Rates")
-    graphTopNStates(stateCounts, nationalCounts, 5, "Top National Message Rates")
+    graphTopNStates(stateCounts, nationalCounts, 5,
+                    "Top National Message Rates")
 
     print("Side-by-side bar charts:")
     messageTypes = getDataForRegion(df, "message")
