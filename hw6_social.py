@@ -341,25 +341,25 @@ Parameters: dict mapping strs to (dicts mapping strs to ints) ; str
 Returns: None
 '''
 def graphRegionComparison(regionDicts, title):
-#    # print(regionDicts)
-#     region_names = []
-#     feature_names = []
-#     feature_values = []
-#     for key,values in regionDicts.items():
-#         #print(key)
-#         # print(values)
-#         region_names.append(key)
-#         temp = []   
-#         for feature,count in values.items():
-#             if feature not in feature_names:
-#                 feature_names.append(feature)
-#             temp.append(count)
-#             #print(temp)
-#         #print(temp)
-#         #print(feature_names)
-#         feature_values.append(temp)
-#     #print(region_feature)
-#     sideBySideBarPlots(feature_names,region_names,feature_values,title)
+   # print(regionDicts)
+    region_names = []
+    feature_names = []
+    feature_values = []
+    for key,values in regionDicts.items():
+        #print(key)
+        # print(values)
+        region_names.append(key)
+        temp = []   
+        for feature,count in values.items():
+            if feature not in feature_names:
+                feature_names.append(feature)
+            temp.append(count)
+            #print(temp)
+        #print(temp)
+        #print(feature_names)
+        feature_values.append(temp)
+    #print(region_feature)
+    sideBySideBarPlots(feature_names,region_names,feature_values,title)
     
     return
 
