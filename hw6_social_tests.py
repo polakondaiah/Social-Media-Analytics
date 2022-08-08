@@ -247,11 +247,11 @@ def runWeek2():
     addSentimentColumn(df)
 
     stateCounts = getDataCountByState(df, "", "")
-    print("Total Messages Per State")
+    print("\nTotal Messages Per State")
     print(stateCounts)
 
     negSentiments = getDataCountByState(df, "sentiment", "negative")
-    print("State Counts for Negative Sentiment")
+    print("\nState Counts for Negative Sentiment")
     print(negSentiments)
     attacks = getDataCountByState(df, "message", "attack")
     print("\nState Counts for Attacks")
@@ -293,23 +293,22 @@ def runWeek3():
 
     print("Basic bar charts:")
     twitterCounts = getDataCountByState(df, "source", "facebook")
-    graphStateCounts(stateCounts, "Total Messages Per State")
-    graphStateCounts(twitterCounts, "Total *Facebook* Messages Per State")
+    # graphStateCounts(stateCounts, "Total Messages Per State")
+    # graphStateCounts(twitterCounts, "Total *Facebook* Messages Per State")
 
     print("Filtered bar charts:")
     attackCounts = getDataCountByState(df, "message", "attack")
     policyCounts = getDataCountByState(df, "message", "policy")
     nationalCounts = getDataCountByState(df, "audience", "national")
-    graphTopNStates(stateCounts, attackCounts, 5, "Top Attack Message Rates")
-    graphTopNStates(stateCounts, policyCounts, 5, "Top Policy Message Rates")
-    graphTopNStates(stateCounts, nationalCounts, 5,
-                    "Top National Message Rates")
+    # graphTopNStates(stateCounts, attackCounts, 5, "Top Attack Message Rates")
+    # graphTopNStates(stateCounts, policyCounts, 5, "Top Policy Message Rates")
+    #graphTopNStates(stateCounts, nationalCounts, 5,"Top National Message Rates")
 
     print("Side-by-side bar charts:")
     messageTypes = getDataForRegion(df, "message")
     positionTypes = getDataForRegion(df, "position")
-    graphRegionComparison(messageTypes, "Messages by Region")
-    graphRegionComparison(positionTypes, "Position by Region")
+    # graphRegionComparison(messageTypes, "Messages by Region")
+    # graphRegionComparison(positionTypes, "Position by Region")
 
     print("Scatterplot:")
     graphHashtagSentimentByFrequency(df)

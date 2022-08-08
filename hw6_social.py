@@ -294,15 +294,15 @@ Parameters: dict mapping strs to ints ; str
 Returns: None
 '''
 def graphStateCounts(stateCounts, title):
-    # import matplotlib.pyplot as plt
-    # dict_to_list = list(stateCounts.items())
-    # for key,value in dict_to_list:
-    #     labels = key
-    #     yValues = value
-    #     plt.bar(labels,yValues,color='red')
-    #     plt.xlabel(title,loc='center')
-    #     plt.xticks(rotation="vertical")
-    #     plt.title(title)
+    import matplotlib.pyplot as plt
+    dict_to_list = list(stateCounts.items())
+    for key,value in dict_to_list:
+        labels = key
+        yValues = value
+        plt.bar(labels,yValues,color='red')
+        plt.xlabel(title,loc='center')
+        plt.xticks(rotation="vertical")
+        plt.title(title)
         
     plt.show()
     
@@ -320,9 +320,13 @@ def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
     
     # feature ={}
     # h = {}
+    # #print(stateCounts)
+    # #print(stateFeatureCounts)
     # for i in stateFeatureCounts:
     #     feature[i] = stateFeatureCounts[i]/stateCounts[i]
+    # #print(feature)
     # s = Counter(feature)
+    # #print(s)
     # sort = list(sorted(s.items(), key=operator.itemgetter(1),reverse=True))[:n]
     # for key,value in sort:
     #     h[key] = value
@@ -337,20 +341,25 @@ Parameters: dict mapping strs to (dicts mapping strs to ints) ; str
 Returns: None
 '''
 def graphRegionComparison(regionDicts, title):
-    # region_names = []
-    # feature_names = []
-    # region_feature = []
-    # for key,values in regionDicts.items():
-    #     print(key)
-       # print(values)
-    #     feature_names.append(key)
-    #     temp = []
-    #     for region,feature in values.items():
-    #         if region not in region_names:
-    #             region_names.append(region)
-    #         temp.append(feature)
-    #     region_feature.append(temp)
-    # sideBySideBarPlots(region_names,feature_names,region_feature,title)
+#    # print(regionDicts)
+#     region_names = []
+#     feature_names = []
+#     feature_values = []
+#     for key,values in regionDicts.items():
+#         #print(key)
+#         # print(values)
+#         region_names.append(key)
+#         temp = []   
+#         for feature,count in values.items():
+#             if feature not in feature_names:
+#                 feature_names.append(feature)
+#             temp.append(count)
+#             #print(temp)
+#         #print(temp)
+#         #print(feature_names)
+#         feature_values.append(temp)
+#     #print(region_feature)
+#     sideBySideBarPlots(feature_names,region_names,feature_values,title)
     
     return
 
@@ -369,6 +378,7 @@ def graphHashtagSentimentByFrequency(data):
     # common = mostCommonHashtags(hashtag,50)
     # for key,value in common.items():
     #     hashtags.append(key)
+    #    # if value not in frequency
     #     frequency.append(value)
     #     sentiment.append(getHashtagSentiment(data,key))
     # scatterPlot(frequency,sentiment,hashtags,"sentiment_graph")
@@ -389,7 +399,9 @@ def sideBySideBarPlots(xLabels, labelList, valueLists, title):
         xValues = []
         for i in range(len(xLabels)):
             xValues.append(i - 0.4 + w * (dataset + 0.5))
+           
         xPositions.append(xValues)
+        # print(xValues)
 
     for index in range(len(valueLists)):
         plt.bar(xPositions[index], valueLists[index], width=w, label=labelList[index])
@@ -409,7 +421,7 @@ def scatterPlot(xValues, yValues, labels, title):
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
 
-    plt.scatter(xValues, yValues)
+    plt.scatter(xValues, yValues, color = 'hotpink')
 
     # make labels for the points
     for i in range(len(labels)):
@@ -432,9 +444,9 @@ def scatterPlot(xValues, yValues, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+  #  print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
    # test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+  #  print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
     # test.testMakeDataFrame()
     # test.testParseName()
@@ -444,14 +456,14 @@ if __name__ == "__main__":
     # test.testGetRegionFromState()
     
     ## Uncomment these for Week 2 ##
-    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+ #   print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
   #  test.week2Tests()
-    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    #test.runWeek2()
+ #   print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+   # test.runWeek2()
     # df = makeDataFrame("data/politicaldata.csv")
     # test.testFindSentiment()
     # test.testAddSentimentColumn()
-    # test.testGetDataCountByState()
+    # test.testGetDataCountByState(df)
     # test.testGetHashtagRates()
     # test.testGetHashtagSentiment()
 
