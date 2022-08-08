@@ -318,19 +318,19 @@ Returns: None
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
     
     
-    # feature ={}
-    # h = {}
-    # #print(stateCounts)
-    # #print(stateFeatureCounts)
-    # for i in stateFeatureCounts:
-    #     feature[i] = stateFeatureCounts[i]/stateCounts[i]
-    # #print(feature)
-    # s = Counter(feature)
-    # #print(s)
-    # sort = list(sorted(s.items(), key=operator.itemgetter(1),reverse=True))[:n]
-    # for key,value in sort:
-    #     h[key] = value
-    # graphStateCounts(h,title)
+    feature ={}
+    h = {}
+    #print(stateCounts)
+    #print(stateFeatureCounts)
+    for i in stateFeatureCounts:
+        feature[i] = stateFeatureCounts[i]/stateCounts[i]
+    #print(feature)
+    s = Counter(feature)
+    #print(s)
+    sort = list(sorted(s.items(), key=operator.itemgetter(1),reverse=True))[:n]
+    for key,value in sort:
+        h[key] = value
+    graphStateCounts(h,title)
     return
 
 
